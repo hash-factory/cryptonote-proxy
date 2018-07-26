@@ -20,6 +20,15 @@ app.get('/', function(req, res) {
 	res.sendFile(path.resolve(__dirname+'/index.html'));
 });
 
+app.get('/user/:user/select/:coin', function(req, res) {
+	let user = req.params.user
+	let coin = req.params.coin
+
+	selectCoin(user, coin)
+
+	res.send({})
+});
+
 const logger = new (winston.Logger)({
 	transports: [
 		new winston.transports.Console({timestamp:(new Date()).toLocaleTimeString(),colorize:true,level:'info'}),
@@ -42,6 +51,12 @@ var workerhashrates = {};
 
 logger.info("start http interface on port %d ", config.httpport);
 server.listen(config.httpport,'::');
+
+function selectCoin(user, coin) {
+	logger.info('-> Selecting '+coin+' ('+user+')');
+	pools[user].default=coin;
+	switchEmitter.emit('switch',coin,user);
+}
 
 function attachPool(localsocket,coin,firstConn,setWorker,user,pass) {
 
@@ -232,7 +247,7 @@ const workerserver = net.createServer(function (localsocket) {
 
 	localsocket.on('data', function (data) {
 		
-		if(data) logger.debug('received from woker ('+localsocket.remoteAddress+':'+localsocket.remotePort+'):'+data.toString().trim());
+		if(data) logger.debug('received from worker ('+localsocket.remoteAddress+':'+localsocket.remotePort+'):'+data.toString().trim());
 		var request = JSON.parse(data);
 		
 		if(request.method === 'login')
@@ -310,6 +325,7 @@ io.on('connection', function(socket){
 		socket.emit('coins',coins);
 		logger.info("pool config reloaded");
 	});
+
 	socket.on('user',function(user) {
 		var coins = [];
 		for (var pool of pools[user]) 
@@ -331,10 +347,9 @@ io.on('connection', function(socket){
 		}, 2000);
 	});
 
-	socket.on('switch', function(user,coin){
-		logger.info('->'+coin+' ('+user+')');
-		pools[user].default=coin;
-		switchEmitter.emit('switch',coin,user);
+	socket.on('switch', function(user, coin) {
+		selectCoin(user, coin)
+
 		socket.emit('active',coin);
 	});
 
