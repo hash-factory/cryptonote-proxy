@@ -17,8 +17,14 @@ app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.get('/', function(req, res) {
-	res.sendFile(path.resolve(__dirname+'/index.html'));
+	res.sendFile(path.resolve(__dirname+'/index.html'))
 });
+
+app.get('/pools', function(req, res) {
+	config = require('./config.json')
+
+	res.send(config.pools)
+})
 
 app.get('/user/:user/select/:coin', function(req, res) {
 	let user = req.params.user

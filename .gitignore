@@ -61,7 +61,6 @@ typings/
 .next
 
 
-bot/config.json
-bot/stats/*
-
 .DS_Store
+
+logfile.txt
