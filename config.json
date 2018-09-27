@@ -7,7 +7,7 @@
 		"userA":[
 			{
 				"symbol":"Electronero-uspool",
-				"name":"etnkHfFuanNeTe3q9dux4d9cRiLkUR4hDffvhfTp6nbhEJ5R8TY4vdyZjT4BtWxnvSJ5nfD64eCAQfKMJHSym2dj8PQqeiKmBM",
+				"name":"85ceM1MELV1HgNRAWuRC2P1ABCvHUmEkieB49bLPAEG4LJAyRTRfEWJFX85gDrKnUkSRtxQxvdUUY8ZYT1hfMH6XU8przaV",
 				"host":"uspool.electronero.org",
 				"port":"6666",
 				"url":"https://uspool.electronero.org",
@@ -15,7 +15,7 @@
 			},
 			{
 				"symbol":"Electronero-pool",
-				"name":"etnkHfFuanNeTe3q9dux4d9cRiLkUR4hDffvhfTp6nbhEJ5R8TY4vdyZjT4BtWxnvSJ5nfD64eCAQfKMJHSym2dj8PQqeiKmBM",
+				"name":"85ceM1MELV1HgNRAWuRC2P1ABCvHUmEkieB49bLPAEG4LJAyRTRfEWJFX85gDrKnUkSRtxQxvdUUY8ZYT1hfMH6XU8przaV",
 				"host":"pool.electronero.org",
 				"port":"6666",
 				"url":"https://pool.electronero.org",
